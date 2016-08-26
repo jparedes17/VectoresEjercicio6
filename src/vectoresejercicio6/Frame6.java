@@ -187,7 +187,7 @@ public class Frame6 extends javax.swing.JFrame {
         }
         else 
         {
-               advertir = "El vevtor no es simetrico";  
+               advertir = "El vector no es simetrico";  
         }
         }
        txtResultado.append(advertir);
