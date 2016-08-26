@@ -56,6 +56,12 @@ public class Frame6 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Longitud:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 90, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 180, 100));
@@ -69,7 +75,7 @@ public class Frame6 extends javax.swing.JFrame {
                 cmbCrearActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        jPanel3.add(cmbCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 100, -1));
 
         cmbLlenarManual.setText("Llenar Manual");
         cmbLlenarManual.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +83,7 @@ public class Frame6 extends javax.swing.JFrame {
                 cmbLlenarManualActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        jPanel3.add(cmbLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         cmbMostrar.setText("Mostrar");
         cmbMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +91,7 @@ public class Frame6 extends javax.swing.JFrame {
                 cmbMostrarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        jPanel3.add(cmbMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 100, -1));
 
         cmbBorrar.setText("Borrar");
         cmbBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +99,7 @@ public class Frame6 extends javax.swing.JFrame {
                 cmbBorrarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jPanel3.add(cmbBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, -1));
 
         cmbInvertir.setText("Invertir");
         cmbInvertir.addActionListener(new java.awt.event.ActionListener() {
@@ -101,9 +107,9 @@ public class Frame6 extends javax.swing.JFrame {
                 cmbInvertirActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbInvertir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        jPanel3.add(cmbInvertir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 180, 280));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 190, 240));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,9 +131,22 @@ public class Frame6 extends javax.swing.JFrame {
     private void cmbCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCrearActionPerformed
         // TODO add your handling code here:
         int longitud;
+        if (txtLongitud.getText().trim().isEmpty())
+        {
+          JOptionPane.showMessageDialog(this, "Ingrese la longitud", "ERROR", JOptionPane.ERROR_MESSAGE);
+          txtLongitud.requestFocusInWindow();
+        }
+        else if(Integer.parseInt(txtLongitud.getText().trim())==0)
+        {
+            JOptionPane.showMessageDialog(this, "La Longitud no puede ser cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtLongitud.requestFocusInWindow();
+            txtLongitud.selectAll();
+        }
+        else {
         longitud = Integer.parseInt(txtLongitud.getText().trim());
         v= new double [longitud];
         JOptionPane.showMessageDialog(this, "Vectores creados Correctamente");
+        }
     }//GEN-LAST:event_cmbCrearActionPerformed
 
     private void cmbLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLlenarManualActionPerformed
@@ -173,6 +192,15 @@ public class Frame6 extends javax.swing.JFrame {
         }
        txtResultado.append(advertir);
     }//GEN-LAST:event_cmbInvertirActionPerformed
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar(); 
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+          } 
+    }//GEN-LAST:event_txtLongitudKeyTyped
 
     /**
      * @param args the command line arguments
